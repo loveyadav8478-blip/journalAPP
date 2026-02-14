@@ -33,6 +33,7 @@ public class JournalApplication {
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
+        
     }
 
 
