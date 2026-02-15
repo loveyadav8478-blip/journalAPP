@@ -37,6 +37,7 @@ public class PublicController {
     @GetMapping("/health-check")
     public String healthCheck(){
         System.out.println("Health is OK!!");
+        log.info("Health is OK!!");
         return "Ok";
     }
 
