@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: {RESID_HOST}
+    host: ${RESID_HOST}
     port: 13604
     password: {REDIS_PASSWORD}
   data:
@@ -51,7 +51,7 @@ spring:
   server:
     port: ${SERVER_PORT}
     servlet:
-      context-path: /journal
+#      context-path: /journal
 
 weather:
   api:
