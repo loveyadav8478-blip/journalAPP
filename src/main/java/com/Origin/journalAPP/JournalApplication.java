@@ -28,6 +28,7 @@ public class JournalApplication {
     @Bean
     public PlatformTransactionManager run(MongoDatabaseFactory dbFactory){
         return new MongoTransactionManager(dbFactory);
+
     }
 
     @Bean

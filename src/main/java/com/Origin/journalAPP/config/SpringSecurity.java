@@ -59,8 +59,7 @@ public class SpringSecurity {
     // 🔐 Password encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEn
-        coder();
+        return new BCryptPasswordEncoder();
     }
 
     // 🔑 AuthenticationManager bean (replacement for authenticationManagerBean())
