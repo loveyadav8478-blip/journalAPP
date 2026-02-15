@@ -1,6 +1,7 @@
 package com.Origin.journalAPP.controller;
 
 import com.Origin.journalAPP.api.response.WeatherResponse;
+import com.Origin.journalAPP.dto.UserDTO;
 import com.Origin.journalAPP.entity.JournalEntry;
 import com.Origin.journalAPP.entity.User;
 import com.Origin.journalAPP.repository.UserRepository;
@@ -8,6 +9,7 @@ import com.Origin.journalAPP.service.JournalEntryService;
 import com.Origin.journalAPP.service.UserService;
 import com.Origin.journalAPP.service.WeatherService;
 import com.sun.net.httpserver.HttpsServer;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name="User APIs")
 public class UserController {
 
     @Autowired
@@ -34,13 +37,17 @@ public class UserController {
 
 
     @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody User user){
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         User userInDb = userService.findByUsername(userName);
         if(userInDb!=null){
-            user.setUserName(userInDb.getUserName());
-            user.setPassword(userInDb.getPassword());
+            if(userDTO.getUserName()!=null){
+                userInDb.setUserName(userDTO.getUserName());
+            }
+            if(userDTO.getPassword()!=null){
+                userInDb.setPassword(userDTO.getPassword());
+            }
             userService.saveEntry(userInDb);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
